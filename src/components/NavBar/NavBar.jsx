@@ -4,7 +4,7 @@ const NavBar = () => {
     return(
         <nav className="navbar navbar-expand navbar bg-body-tertiary fixed-top"  data-bs-theme="dark">
             <div className="container">
-                <a className="navbar-brand" href="#">Shopifast</a>
+                <a className="navbar-brand" color="#68e1fd" href="#" ><h3 className="customTitle">Shopifast</h3></a>
                 <div className="collapse navbar-collapse ">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
@@ -27,20 +27,6 @@ const NavBar = () => {
             </div>
         </nav>
         
-        
-        // <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        //     <div className="container-fluid">
-        //         <h1>e-commerce</h1>
-        //         <div>
-        //             <button>Celulares</button>
-        //             <button>Tablets</button>
-        //             <button>Notebooks</button>
-        //         </div>
-        //         <span className="navbar-text">
-        //             <CartWidget/>
-        //         </span>
-        //     </div>
-        // </nav>
     )
 }
 
