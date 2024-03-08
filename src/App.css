@@ -6,8 +6,9 @@
 }
 
 
-p {
-  color:white
+.pCustomParagraph {
+  color:black;
+  font-size: 16px
 }
 
 .customTitle {

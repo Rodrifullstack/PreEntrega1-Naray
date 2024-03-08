@@ -1,23 +1,24 @@
+import { Link } from "react-router-dom"
 import CartWidget from "../CartWidget/CartWidget"
 
 const NavBar = () => {
     return(
+        <>
         <nav className="navbar navbar-expand navbar bg-body-tertiary fixed-top"  data-bs-theme="dark">
-            <div className="container">
-                <a className="navbar-brand" color="#68e1fd" href="#" ><h3 className="customTitle">Shopifast</h3></a>
+            <div className="container" >
                 <div className="collapse navbar-collapse ">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Productos</a>
+                            <Link to={"/"}><a className="nav-item" color="#68e1fd" href="#" ><h3 className="customTitle">Shopifast</h3></a></Link>
+                        </li>   
+                        <li className="nav-item">
+                           <Link to={"/category/celular"}> <a className="nav-link active" aria-current="page" href="#">Celulares</a> </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Ofertas</a>
+                           <Link to={"/category/tablet"}> <a className="nav-link active" aria-current="page" href="#">Tablets</a> </Link>
                         </li>
                         <li className="nav-item ">
-                            <a className="nav-link active" aria-current="page" href="#">Sucursales</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Contactanos</a>
+                            <Link to={"/category/Computadora"}><a className="nav-link active" aria-current="page" href="#">Computadoras</a></Link>
                         </li>
                     </ul>
                     <span className="navbar-text">
@@ -26,7 +27,10 @@ const NavBar = () => {
                 </div>
             </div>
         </nav>
-        
+        <br/>
+        <br/>
+        <br/>
+        </>
     )
 }
 
