@@ -1,18 +1,34 @@
+import { useContext } from "react"
+import { CartContext } from "../../context/CartContext"
 
-const CartItem = ({ id, name, price, quantity }) => {
+const CartItem = ({ id, name, price, quantity, img }) => {
+  const { removeItem } = useContext(CartContext)
+
   return (
-    <div>
-      
-      <ul style={{ listStyleType: 'none', padding: 0, margin: 0, overflow: 'hidden' }}>
-        <li style={{ float: 'left', marginRight: '10px' }}>`Producto: ${id}`</li>
-        <li style={{ float: 'left', marginRight: '10px' }}>`Producto: ${name}`</li>
-        <li style={{ float: 'left', marginRight: '10px' }}>`Cantidad: ${quantity}`</li>
-        <li style={{ float: 'left', marginRight: '10px' }}>`Precio: ${price}`</li>
-        <li style={{ float: 'left', marginRight: '10px' }}>`Subtotal: ${price * quantity}`</li>
-      </ul>
-
-
-    </div>
+      <li className="list-group-item">
+        <div className="container text-center">
+          <div className="row align-items-center">
+            <div className="col">
+              <img src={img} style={{width: 75}}/>
+            </div>
+            <div className="col">
+              Producto: {name}
+            </div>
+            <div className="col">
+              Cantidad: {quantity}
+            </div>
+            <div className="col">
+              Precio: ${price}
+            </div>
+            <div className="col">
+              Subtotal: ${price * quantity}
+            </div>
+            <div className="col">
+              <button onClick={() => removeItem(id)}> X </button>
+            </div>
+          </div>
+        </div>
+      </li>
   )
 }
 

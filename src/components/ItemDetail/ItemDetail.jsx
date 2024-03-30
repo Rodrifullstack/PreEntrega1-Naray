@@ -13,7 +13,7 @@ const ItemDetail = ({id,name, img, category, price, description, stock}) => {
     setCantidadAgreagda(cantidad)
     
     const item = {
-      id, name, price
+      id, name, price, img
     }
 
     addItem(item,cantidad)

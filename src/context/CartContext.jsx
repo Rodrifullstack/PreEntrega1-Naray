@@ -11,6 +11,7 @@ export const CartProvider = ({ children }) => {
 
   console.log(cart)
 
+
   const addItem = (item, quantity) => {
     if (!isInCart(item.id)) {
       setCart(perv => [...perv, { ...item, quantity }])
@@ -21,6 +22,8 @@ export const CartProvider = ({ children }) => {
   }
 
   const removeItem = (itemId) => {
+    const removedItem = cart.find( prod => prod.id === itemId)
+    setTotal((prev) => prev - removedItem.price * removedItem.quantity)
     const cartUpdated = cart.filter(prod => prod.id !== itemId)
     setCart(cartUpdated)
   }
