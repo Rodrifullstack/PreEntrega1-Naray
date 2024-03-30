@@ -1,41 +1,53 @@
 import { useEffect, useState } from "react";
-import { getProducts, getProductsByCategory } from "../../asyncmock";
-import ItemList from "../ItemList/ItemList";
-import { useParams } from "react-router-dom";
-// import { db } from "../../services/firebase/index"
-// import { collection, getDocs } from "firebase/firestore";
 
-const ItemListContainer = ({ greeting }) => {    
-    
+import ItemList from "../ItemList/ItemList";
+import { db } from "../../services/firebase"
+import { useParams } from "react-router-dom";
+import { collection, getDocs, query, where } from "firebase/firestore";
+
+
+const ItemListContainer = ({ greeting }) => {
+
+    const [loading, setLoading] = useState(true)
     const [products, setProducts] = useState([])
-    const {categoryId} = useParams()
-    
-    useEffect( () => {
-        const asyncFunctions = categoryId ? getProductsByCategory : getProducts
-        asyncFunctions(categoryId)
-            .then((res) => {
-                setProducts(res)
+    const { categoryId } = useParams()
+
+    useEffect(() => {
+        setLoading(true)
+        const collectionRef = categoryId
+            ? query(collection(db, "products"), where("category", "==", categoryId))
+            : collection(db, "products")
+        getDocs(collectionRef)
+            .then((querySnapshot) => {
+                console.log(querySnapshot)
+                const products = querySnapshot.docs.map((doc) => {
+                    return { id: doc.id, ...doc.data() }
+                })
+                setProducts(products)
             })
-            .catch( error => {
+            .catch((error) => {
                 console.log(error)
             })
-        // const collectionRef = collection(db, "products")
-        // getDocs(collectionRef)
-        //     .then((response) => {
-                
-        //     })
-
-
+            .finally(() => {
+                setLoading(false)
+            });
 
     }, [categoryId])
 
 
-    return(
+    return (
         <>
-            <h1>{greeting}</h1>
-            <ItemList products={products}/>
+            {(!loading) ? (
+                <>
+                    <h1>{greeting}</h1>
+                    <ItemList products={products} />
+                </>
+            ) :
+                (<h2> Cargado productos...</h2>)
+            }
         </>
     )
+
 }
 
 export default ItemListContainer;
