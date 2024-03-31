@@ -4,6 +4,7 @@ import ItemList from "../ItemList/ItemList";
 import { db } from "../../services/firebase"
 import { useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Spinner from "../Spinner/Spinner";
 
 
 const ItemListContainer = ({ greeting }) => {
@@ -43,7 +44,11 @@ const ItemListContainer = ({ greeting }) => {
                     <ItemList products={products} />
                 </>
             ) :
-                (<h2> Cargado productos...</h2>)
+                (<>
+                    <Spinner />
+                    <h2> Cargado productos...</h2>
+                </>
+                )
             }
         </>
     )

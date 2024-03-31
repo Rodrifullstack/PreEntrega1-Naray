@@ -3,6 +3,7 @@ import ItemDetail from "../ItemDetail/ItemDetail"
 import { useParams } from "react-router-dom"
 import { doc, getDoc } from "firebase/firestore"
 import { db } from "../../services/firebase"
+import Spinner from "../Spinner/Spinner"
 
 const ItemDetailContainer = () => {
 
@@ -14,7 +15,7 @@ const ItemDetailContainer = () => {
 
     getDoc(doc(db, "products", productId))
       .then((querySnapshot) => {
-        // console.log(querySnapshot)
+
         const product = { id: querySnapshot.id, ...querySnapshot.data() }
         setProduct(product)
       })
@@ -25,13 +26,6 @@ const ItemDetailContainer = () => {
         setLoading(false)
       });
 
-    // getProductById(productId)
-    //   .then( res => {
-    //     setProduct(res)
-    //   })
-    //   .catch( error => {
-    //     console.log(error)
-    //   })
   }, [productId])
 
   return (
@@ -40,7 +34,10 @@ const ItemDetailContainer = () => {
         ? (<div>
           <ItemDetail {...product} />
         </div>) : (
-          <h2> Cargado Producto...</h2>
+          <>
+            <Spinner />
+            <h2> Cargado Producto...</h2>
+          </>
         )}
     </>
   )
